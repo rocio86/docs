@@ -1,0 +1,32 @@
+library(ggplot2)
+
+# Crear un marco de datos con los datos proporcionados
+datos <- data.frame(
+  Dil_1_100 = c(19.4, 21.81333333, 17.42333333, 22.52, 17.25),
+  Dil_1_10 = c(2.056666667, 1.863333333, 1.193333333, 2.29, 1.74),
+  Dil_1_SDIL = c(21, 22.83333333, 25.83333333, 26, 20.66666667),
+  Control = c(14, 24, 15.33333333, 28, 24.66666667),
+  Fertifox = c(2.643333333, 2.916666667, 1.27, 6.823333333, 4.293333333),
+  Peso_Seco_Raiz_g = c(0.52, 0.4, 0.186666667, 1.08, 0.813333333),
+  Superficie_Hoja_cm2 = c(144.8466667, 91.34, 140.3766667, 153.7333333, 137.5733333),
+  Vol_Radical_ml = c(2.1, 2.666666667, 1.333333333, 6.666666667, 5.666666667),
+  Flores_u = c(1.333333333, 1, 0, 1.666666667, 2),
+  Hojas_Verdaderas_u = c(13.66666667, 13, 11, 16.33333333, 12.33333333),
+  Hojas_Cloroticas_u = c(2.666666667, 2.666666667, 4.333333333, 1.666666667, 2),
+  Color_Hoja_SPAD = c(23.06666667, 24.43333333, 21.33333333, 23.23333333, 25.53333333),
+  Temperatura_C = c(25.51666667, 25.43, 25.43, 25.43333333, 25.35)
+)
+
+# Definir las variables a graficar
+variables <- c("Dil_1_100", "Dil_1_10", "Dil_1_SDIL", "Control", "Fertifox", "Peso_Seco_Raiz_g", 
+               "Superficie_Hoja_cm2", "Vol_Radical_ml", "Flores_u", "Hojas_Verdaderas_u", "Hojas_Cloroticas_u", 
+               "Color_Hoja_SPAD", "Temperatura_C")
+
+# Graficar la relación entre todas las variables usando una matriz de gráficos de dispersión
+ggplot(datos, aes(x = .data[[variables[1]]], y = .data[[variables[2]]])) +
+  geom_point() +
+  labs(x = variables[1], y = variables[2]) +
+  theme_classic() +
+  facet_wrap(~ .) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme(axis.text.x = element_text(angle = 45, hjust
